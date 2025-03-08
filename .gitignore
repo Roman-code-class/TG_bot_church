@@ -1,0 +1,10 @@
+node_modules/
+.env
+data/errors.log
+data/logs/errors.log
+data/dop.txt
+откат.txt
+info.txt
+
+
+
