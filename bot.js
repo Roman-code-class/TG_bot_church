@@ -28,7 +28,15 @@ bot.use((ctx, next) => {
 });
 
 // Загружаем и регистрируем все команды
-const commandFiles = ["start", "menu", "help", "about", "roles", "schedule1"];
+const commandFiles = [
+  "start",
+  "menu",
+  "help",
+  "about",
+  "roles",
+  "schedule1",
+  "schedule2",
+];
 commandFiles.forEach((file) => {
   require(`./commands/${file}`)(bot); // Подключаем и передаем bot
 });

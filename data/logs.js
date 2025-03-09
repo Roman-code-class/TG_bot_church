@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const CHAT_ID = process.env.LOG_CHAT_ID; // ID чата BD_info_grace
+const CHAT_ID = process.env.CHAT_ID; // ID чата BD_info_grace
 const TOPIC_ID = process.env.LOG_TOPIC_ID; // ID темы "логи"
 
 function logError(bot, error) {
@@ -11,8 +11,8 @@ function logError(bot, error) {
   }`;
 
   // Записываем в файл
-  const logFilePath = path.join(__dirname, "errors.log");
-  fs.appendFileSync(logFilePath, errorMessage + "\n", "utf8");
+  //   const logFilePath = path.join(__dirname, "errors.log");
+  //   fs.appendFileSync(logFilePath, errorMessage + "\n", "utf8");
 
   // Отправляем в чат BD_info_grace в тему "логи"
   bot.telegram
