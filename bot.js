@@ -36,7 +36,7 @@ const commandFiles = [
   "roles",
   "schedule1",
   "schedule2",
-  "viewschedule",
+  "viewschedulemy",
 ];
 commandFiles.forEach((file) => {
   require(`./commands/${file}`)(bot); // Подключаем и передаем bot
@@ -57,9 +57,8 @@ bot.launch().then(() => {
   console.log("Бот успешно запущен!");
 });
 
-bot.command("testviewschedule", (ctx) => {
-  console.log("Команда testviewschedule вызвана");
-  ctx.reply("Тест работает");
+bot.on("text", (ctx) => {
+  console.log("Поступило текстовое сообщение:", ctx.message.text);
 });
 
 // 📌 Корректное завершение работы бота

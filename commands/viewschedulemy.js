@@ -1,11 +1,10 @@
 // commands/viewSchedule.js
 const { Markup } = require("telegraf");
 const { loadSchedule1 } = require("../utils/loadSchedule1");
-console.log("Модуль viewSchedule загружен");
 
 module.exports = (bot) => {
   // Команда для просмотра основного расписания (schedule1)
-  bot.command("viewschedule", (ctx) => {
+  bot.command("viewschedulemy", (ctx) => {
     console.log("Команда viewschedule вызвана");
     const scheduleData = loadSchedule1().schedule1; // структура: { "Апрель": [...], "Май": [...] }
     let message = "";
