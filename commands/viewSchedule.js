@@ -4,8 +4,7 @@ const { loadSchedule1 } = require("../utils/loadSchedule1");
 
 module.exports = (bot) => {
   // Команда для просмотра основного расписания (schedule1)
-  bot.command("viewschedulemy", (ctx) => {
-    console.log("Команда viewschedule вызвана");
+  bot.command("viewSchedule", (ctx) => {
     const scheduleData = loadSchedule1().schedule1; // структура: { "Апрель": [...], "Май": [...] }
     let message = "";
     for (const month in scheduleData) {

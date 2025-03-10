@@ -169,10 +169,17 @@ module.exports = (bot) => {
   });
 
   // (8) Обработка текстовых сообщений (в обоих режимах)
-  bot.on("text", (ctx) => {
+  bot.on("text", async (ctx, next) => {
     const userId = ctx.from.id;
     const session = userSessions[userId];
-    if (!session) return;
+
+    // Если нет активной сессии для schedule2 – просто передаем дальше,
+    // чтобы другие обработчики (команды) могли сработать
+    if (!session) {
+      return next();
+    }
+
+    // Режим "step"
     if (session.mode === "step") {
       if (session.step === 1) {
         session.programData.step1 = ctx.message.text;
@@ -201,7 +208,11 @@ module.exports = (bot) => {
           ])
         );
       }
+      // Если session.step не 1/2/3, никаких действий не нужно: пропускаем дальше
+      return next();
     }
+
+    // Режим "single_text"
     if (session.mode === "single_text") {
       session.textData = ctx.message.text;
       return ctx.reply(
@@ -214,6 +225,9 @@ module.exports = (bot) => {
         ])
       );
     }
+
+    // Если session существует, но не подошло под step или single_text – пропускаем дальше
+    return next();
   });
 
   // (9) Подтверждение – отправка расписания2 в тему "расписание2"
