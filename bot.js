@@ -44,14 +44,14 @@ commandFiles.forEach((file) => {
 });
 
 // Команда для тестирования ошибки
-bot.command("test_error", (ctx) => {
-  try {
-    throw new Error("Это тестовая ошибка для логов");
-  } catch (error) {
-    logError(bot, error); // Логируем ошибку
-    ctx.reply("Ошибка сгенерирована и отправлена в логи.");
-  }
-});
+// bot.command("test_error", (ctx) => {
+//   try {
+//     throw new Error("Это тестовая ошибка для логов");
+//   } catch (error) {
+//     logError(bot, error); // Логируем ошибку
+//     ctx.reply("Ошибка сгенерирована и отправлена в логи.");
+//   }
+// });
 
 // Запускаем бота
 bot.launch().then(() => {

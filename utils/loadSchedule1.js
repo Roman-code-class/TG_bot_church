@@ -12,3 +12,18 @@ function loadSchedule1() {
 }
 
 module.exports = { loadSchedule1 };
+
+// const fs = require("fs");
+
+// function loadSchedule1() {
+//   try {
+//     const data = fs.readFileSync("./data/schedule1.json", "utf8");
+//     console.log("✅ Загруженные данные из schedule1.json:", data);
+//     return JSON.parse(data);
+//   } catch (error) {
+//     console.error("❌ Ошибка загрузки schedule1.json:", error);
+//     return {}; // Возвращаем пустой объект при ошибке
+//   }
+// }
+
+// module.exports = { loadSchedule1 };
