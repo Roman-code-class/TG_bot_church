@@ -1,8 +1,15 @@
 require("dotenv").config();
 const fs = require("fs"); // Подключаем файловую систему
 const { Telegraf, Markup } = require("telegraf"); // Импортируем Telegraf и Markup
+const setupHandlers = require("./utils/handlers"); // Подключаем обработчик
 const { loadRoles } = require("./utils/loadRoles");
 const { logError } = require("./data/logs"); // Импортируем функцию logError
+const handlers = require("./utils/handlers");
+const { initViewingSchedule } = require("./commands/viewingSchedule");
+const {
+  initCreateScheduleCommand,
+  handleCreatingSchedule,
+} = require("./commands/createSchedule");
 
 const bot = new Telegraf(process.env.BOT_TOKEN); // Создаем бота
 
@@ -28,17 +35,12 @@ const bot = new Telegraf(process.env.BOT_TOKEN); // Создаем бота
 //   return next(); // Если доступ есть, продолжаем выполнение команды
 // });
 
+initViewingSchedule(bot); // Инициализация командыы просмотр расписания
+initCreateScheduleCommand(bot);
+handlers(bot); // Подключаем обработчик callback-кнопок
+
 // Загружаем и регистрируем все команды
-const commandFiles = [
-  "start",
-  "menu",
-  "help",
-  "about",
-  "roles",
-  "schedule1",
-  "schedule2",
-  "viewSchedule",
-];
+const commandFiles = ["start", "schedule"];
 commandFiles.forEach((file) => {
   require(`./commands/${file}`)(bot); // Подключаем и передаем bot
 });
