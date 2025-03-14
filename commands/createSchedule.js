@@ -1,5 +1,8 @@
+// команда - создание расписания для события
+
 const { Markup } = require("telegraf");
-const viewAllSchedule = require("../utils/viewAllSchedule");
+const { viewAllSchedule } = require("../utils/viewAllSchedule");
+const registerCustomEventButtons = require("../utils/registerCustomEventButtons");
 const userSessions = require("../utils/userSessions");
 
 module.exports = (bot) => {
@@ -18,4 +21,6 @@ module.exports = (bot) => {
   bot.action("create_all", async (ctx) => {
     await viewAllSchedule(ctx);
   });
+
+  registerCustomEventButtons(bot, "create_by_type");
 };

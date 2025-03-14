@@ -1,16 +1,14 @@
-// показать все события
+// просмотр всего расписания
 
-const { loadSchedule1 } = require("./loadSchedule1");
+const { loadSchedule1 } = require("../utils/loadSchedule1");
+const formatSchedule = require("../utils/formatSchedule");
 
 async function viewAllSchedule(ctx) {
-  console.log("📌 Обработчик просмотра всех событий");
-
   const scheduleData = loadSchedule1().schedule1;
-  if (!scheduleData) {
-    return ctx.reply("❌ В файле расписания нет данных.");
-  }
+  if (!scheduleData) return ctx.reply("❌ В файле расписания нет данных.");
 
-  return ctx.reply("📅 Все события:\n" + JSON.stringify(scheduleData, null, 2));
+  const formattedText = formatSchedule(scheduleData);
+  return ctx.replyWithMarkdown(formattedText);
 }
 
-module.exports = viewAllSchedule;
+module.exports = { viewAllSchedule }; // <-- Убедись, что экспорт правильный

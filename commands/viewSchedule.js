@@ -1,5 +1,8 @@
+// команда - просмотр собыйти
 const { Markup } = require("telegraf");
-const viewAllSchedule = require("../utils/viewAllSchedule");
+const { viewAllSchedule } = require("../utils/viewAllSchedule");
+const registerCustomEventButtons = require("../utils/registerCustomEventButtons");
+const { getUserSchedule } = require("../utils/userSchedule");
 const userSessions = require("../utils/userSessions");
 
 module.exports = (bot) => {
@@ -17,5 +20,13 @@ module.exports = (bot) => {
   // показать все события
   bot.action("view_all", async (ctx) => {
     await viewAllSchedule(ctx);
+  });
+
+  registerCustomEventButtons(bot, "view_choose_event");
+
+  bot.action("view_user_schedule", async (ctx) => {
+    const userId = ctx.from.id; // Получаем ID пользователя
+    const response = getUserSchedule(userId);
+    ctx.reply(response);
   });
 };
